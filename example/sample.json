@@ -1,0 +1,431 @@
+{
+  "namespace": "Sample.WebApi",
+  "apiVersion": "1.0.0",
+  "controllers": [
+    {
+      "name": "Address",
+      "authorized": false,
+      "obsolete": false,
+      "methods": [
+        {
+          "name": "FindById",
+          "httpMethodId": 1,
+          "path": "/address/{addressId}",
+          "authorized": false,
+          "obsolete": false,
+          "attributes": null,
+          "parameters": [
+            {
+              "name": "addressId",
+              "obsolete": false,
+              "optional": true,
+              "hasDefaultValue": true,
+              "defaultValue": 0,
+              "sourceId": 1,
+              "type": {
+                "typeId": 6,
+                "formatId": 4,
+                "nullable": false
+              }
+            }
+          ],
+          "returnType": {
+            "typeId": 0,
+            "name": "Address",
+            "nullable": false
+          },
+          "docs": {
+            "summary": null,
+            "remarks": null,
+            "parameters": [],
+            "returns": null
+          }
+        }
+      ],
+      "dependencies": [
+        "Address"
+      ],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    }
+  ],
+  "enums": [
+    {
+      "name": "DayOfWeek",
+      "fullName": "System.DayOfWeek",
+      "obsolete": false,
+      "typeId": 1,
+      "properties": [
+        {
+          "name": "Sunday",
+          "value": 0
+        },
+        {
+          "name": "Monday",
+          "value": 1
+        },
+        {
+          "name": "Tuesday",
+          "value": 2
+        },
+        {
+          "name": "Wednesday",
+          "value": 3
+        },
+        {
+          "name": "Thursday",
+          "value": 4
+        },
+        {
+          "name": "Friday",
+          "value": 5
+        },
+        {
+          "name": "Saturday",
+          "value": 6
+        }
+      ],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    }
+  ],
+  "models": [
+    {
+      "name": "Address",
+      "fullName": "Sample.Addresses.Address",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "StreetAddress",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "StreetAddressLine2",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "City",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "County",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "State",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "Zip",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        },
+        {
+          "name": "Centroid",
+          "obsolete": false,
+          "type": {
+            "typeId": 0,
+            "name": "GeoPoint",
+            "nullable": true
+          }
+        }
+      ],
+      "dependencies": [
+        "GeoPoint"
+      ],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    },
+    {
+      "name": "GeoPoint",
+      "fullName": "Sample.Common.GeoPoint",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "Latitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        },
+        {
+          "name": "Longitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        }
+      ],
+      "dependencies": [],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    },
+    {
+      "name": "GeoPolygon",
+      "fullName": "Sample.Common.GeoPolygon",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "Points",
+          "obsolete": false,
+          "type": {
+            "typeId": 3,
+            "of": {
+              "typeId": 0,
+              "name": "GeoPoint",
+              "nullable": false
+            },
+            "nullable": false
+          }
+        }
+      ],
+      "dependencies": [
+        "GeoPoint"
+      ],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    },
+    {
+      "name": "GeoRectangle",
+      "fullName": "Sample.Common.GeoRectangle",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "WestLongitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        },
+        {
+          "name": "NorthLatitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        },
+        {
+          "name": "EastLongitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        },
+        {
+          "name": "SouthLatitude",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 10,
+            "nullable": false
+          }
+        }
+      ],
+      "dependencies": [],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    },
+    {
+      "name": "PageIndex",
+      "fullName": "Sample.Common.Paging+PageIndex",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "Index",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "IsDisplayedAsEllipsis",
+          "obsolete": false,
+          "type": {
+            "typeId": 5,
+            "nullable": false
+          }
+        },
+        {
+          "name": "DisplayText",
+          "obsolete": false,
+          "type": {
+            "typeId": 7,
+            "formatId": 0,
+            "nullable": false
+          }
+        }
+      ],
+      "dependencies": [],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    },
+    {
+      "name": "Paging",
+      "fullName": "Sample.Common.Paging",
+      "obsolete": false,
+      "typeId": 0,
+      "properties": [
+        {
+          "name": "DisplayCharCount",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "CurrentPageSize",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "ItemsCount",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": true
+          }
+        },
+        {
+          "name": "CurrentPageIndex",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "HasItems",
+          "obsolete": false,
+          "type": {
+            "typeId": 5,
+            "nullable": false
+          }
+        },
+        {
+          "name": "FirstPageIndex",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "LastPageIndex",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": false
+          }
+        },
+        {
+          "name": "PreviousPageIndex",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": true
+          }
+        },
+        {
+          "name": "NextPageIndex",
+          "obsolete": false,
+          "type": {
+            "typeId": 6,
+            "formatId": 4,
+            "nullable": true
+          }
+        },
+        {
+          "name": "PageIndexes",
+          "obsolete": false,
+          "type": {
+            "typeId": 3,
+            "of": {
+              "typeId": 0,
+              "name": "PageIndex",
+              "nullable": false
+            },
+            "nullable": false
+          }
+        }
+      ],
+      "dependencies": [
+        "PageIndex"
+      ],
+      "docs": {
+        "summary": null,
+        "remarks": null
+      }
+    }
+  ]
+}
