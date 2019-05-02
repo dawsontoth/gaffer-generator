@@ -66,7 +66,7 @@ Let's break down the discrete steps that happened above:
 ## How do I get started?
 
 ```$bash
-yarn install -g dawsontoth/gaffer
+yarn global add dawsontoth/gaffer
 ```
 
 Copy the `sample.templateroot` in to your own project. Keep it under source control, and update it to generate based on your own metadata JSON, and desired client language.
