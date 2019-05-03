@@ -33,20 +33,18 @@ You should see output similar to the following:
 
 > gaffer generate
 
-[15:20:31] Using gulpfile ~/Code/generator/gulpfile.js
-[15:20:31] Starting 'default'...
-[15:20:31] creating: generator/example/sample.output/date-parser.ts
-[15:20:31] creating: generator/example/sample.output/is-set.ts
-[15:20:31] creating: generator/example/sample.output/models/day-of-week.ts
-[15:20:31] creating: generator/example/sample.output/models/address.ts
-[15:20:31] creating: generator/example/sample.output/models/geo-point.ts
-[15:20:31] creating: generator/example/sample.output/models/geo-polygon.ts
-[15:20:31] creating: generator/example/sample.output/models/geo-rectangle.ts
-[15:20:31] creating: generator/example/sample.output/models/page-index.ts
-[15:20:31] creating: generator/example/sample.output/models/paging.ts
-[15:20:31] creating: generator/example/sample.output/models/index.ts
-[15:20:31] creating: generator/example/sample.output/services/address.service.ts
-[15:20:31] creating: generator/example/sample.output/services/index.ts
+[15:20:31] creating: sample.output/date-parser.ts
+[15:20:31] creating: sample.output/is-set.ts
+[15:20:31] creating: sample.output/models/day-of-week.ts
+[15:20:31] creating: sample.output/models/address.ts
+[15:20:31] creating: sample.output/models/geo-point.ts
+[15:20:31] creating: sample.output/models/geo-polygon.ts
+[15:20:31] creating: sample.output/models/geo-rectangle.ts
+[15:20:31] creating: sample.output/models/page-index.ts
+[15:20:31] creating: sample.output/models/paging.ts
+[15:20:31] creating: sample.output/models/index.ts
+[15:20:31] creating: sample.output/services/address.service.ts
+[15:20:31] creating: sample.output/services/index.ts
 [15:20:31] Finished 'default' after 341 ms
 ```
 
