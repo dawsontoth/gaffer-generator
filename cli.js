@@ -19,6 +19,10 @@ require('yargs')
       boolean: true,
       describe: 'Logs the changes that would be made without actually touching the file system.',
     },
+    'into': {
+      string: true,
+      describe: 'Overrides the directory that .templateroots will target. Useful for targeting dynamic directories.',
+    },
     'silent': {
       boolean: true,
       describe: 'Disables console logging.',

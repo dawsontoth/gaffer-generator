@@ -1,7 +1,9 @@
 require('colors');
-const path = require('path');
 const fs = require('fs');
 const globule = require('globule');
+const defaults = require('lodash.defaults');
+const path = require('path');
+const argv = require('yargs').argv;
 
 const utils = require('../utils');
 const node = require('./node');
@@ -31,6 +33,9 @@ function visit(rootPath) {
     return;
   }
   const templateSettings = require(templateSettingsPath);
+  if (argv.into) {
+    templateSettings.into = argv.into;
+  }
   if (!templateSettings.into) {
     utils.logError(
       'Found .templateroot that does not have a "into" export in template.js:\n'.red
@@ -43,7 +48,7 @@ function visit(rootPath) {
       + templateSettingsPath.cyan);
     return;
   }
-  const toPath = path.join(rootPath, templateSettings.into);
+  const toPath = templateSettings.into[0] === '/' ? templateSettings.into : path.join(rootPath, templateSettings.into);
   templateSettings.download(utils.fetch)
     .catch(err => {
       utils.logError(
