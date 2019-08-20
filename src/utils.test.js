@@ -41,7 +41,7 @@ describe('safeRead', () => {
   });
   test('allows file argument', () => {
     fs.__setResponse('existsSync', false);
-    expect(utils.safeRead({ dirname: '/foo', basename: 'bar.js' })).toBe(null);
+    expect(utils.safeRead({dirname: '/foo', basename: 'bar.js'})).toBe(null);
     expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo/bar.js');
   });
 });
@@ -74,7 +74,7 @@ describe('safeWrite', () => {
   });
   test('allows file argument', () => {
     fs.__setResponse('existsSync', false);
-    utils.safeWrite({ dirname: '/foo', basename: 'bar.js' }, 'baz');
+    utils.safeWrite({dirname: '/foo', basename: 'bar.js'}, 'baz');
     expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo');
     expect(fs.__spy.mkdirSync).toHaveBeenCalledWith('/foo');
     expect(fs.__spy.writeFileSync).toHaveBeenCalledWith('/foo/bar.js', 'baz', 'UTF-8');
@@ -115,9 +115,9 @@ describe('parameterizeString', () => {
   test('translates', () => {
     expect(utils.parameterizeString('foo', {})).toBe('foo');
     expect(utils.parameterizeString('_foo_', {})).toBe('_foo_');
-    expect(utils.parameterizeString('_foo_', { foo: 'bar' })).toBe('bar');
-    expect(utils.parameterizeString('_foo.bar_', { foo: { bar: 'baz' } })).toBe('baz');
-    expect(utils.parameterizeString('_foo_', { foo: 2 })).toBe('2');
+    expect(utils.parameterizeString('_foo_', {foo: 'bar'})).toBe('bar');
+    expect(utils.parameterizeString('_foo.bar_', {foo: {bar: 'baz'}})).toBe('baz');
+    expect(utils.parameterizeString('_foo_', {foo: 2})).toBe('2');
   });
 });
 

@@ -1,10 +1,10 @@
 require('colors');
-const copy = require('recursive-copy'),
-  path = require('path'),
-  argv = require('yargs').argv;
+const copy = require('recursive-copy');
+const path = require('path');
+const argv = require('yargs').argv;
 
-const utils = require('./utils'),
-  dryRun = argv.dryRun || false;
+const utils = require('./utils');
+const dryRun = argv.dryRun || false;
 
 /*
  Public API.
@@ -31,7 +31,7 @@ function run(directory) {
     .then(results => {
       utils.log(results.length + ' file(s) copied');
     })
-    .catch(function(error) {
+    .catch(function (error) {
       utils.logError(String(error).red);
       process.exit(1);
     });

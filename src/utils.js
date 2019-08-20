@@ -1,8 +1,8 @@
 require('colors');
-const _ = require('lodash'),
-  fs = require('fs'),
-  path = require('path'),
-  argv = require('yargs').argv;
+const get = require('lodash.get');
+const fs = require('fs');
+const path = require('path');
+const argv = require('yargs').argv;
 
 /*
  Public API.
@@ -110,8 +110,7 @@ function log(text, writeAsError = false) {
   let prefix = `[${new Date().toTimeString().split(' ')[0]}] `.gray;
   if (writeAsError) {
     console.error(prefix + text);
-  }
-  else {
+  } else {
     console.log(prefix + text);
   }
 }
@@ -125,7 +124,7 @@ function log(text, writeAsError = false) {
 function parameterizeString(str, context) {
   return str.replace(
     /_[a-z]*\.?[a-z]+_/ig,
-    match => _.get(context, match.slice(1, -1)) || match);
+    match => get(context, match.slice(1, -1)) || match);
 }
 
 /**

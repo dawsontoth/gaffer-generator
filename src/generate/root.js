@@ -1,11 +1,10 @@
 require('colors');
-const _ = require('lodash'),
-  path = require('path'),
-  fs = require('fs'),
-  globule = require('globule');
+const path = require('path');
+const fs = require('fs');
+const globule = require('globule');
 
-const utils = require('../utils'),
-  node = require('./node');
+const utils = require('../utils');
+const node = require('./node');
 
 /*
  Public API.
@@ -17,7 +16,7 @@ exports.visit = visit;
  Implementation.
  */
 function run(directory) {
-  let matches = globule.find(path.join(directory, '**/*.templateroot'));
+  const matches = globule.find(path.join(directory, '**/*.templateroot'));
   for (const match of matches) {
     visit(path.resolve(match));
   }
@@ -44,7 +43,7 @@ function visit(rootPath) {
       + templateSettingsPath.cyan);
     return;
   }
-  let toPath = path.join(rootPath, templateSettings.into);
+  const toPath = path.join(rootPath, templateSettings.into);
   templateSettings.download()
     .catch(err => {
       utils.logError(

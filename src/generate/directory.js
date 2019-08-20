@@ -1,12 +1,12 @@
-const _ = require('lodash'),
-  path = require('path'),
-  fs = require('fs'),
-  globule = require('globule'),
-  argv = require('yargs').argv;
+const difference = require('lodash.difference');
+const path = require('path');
+const fs = require('fs');
+const globule = require('globule');
+const argv = require('yargs').argv;
 
-const utils = require('../utils'),
-  dryRun = argv.dryRun || false,
-  node = require('./node');
+const utils = require('../utils');
+const dryRun = argv.dryRun || false;
+const node = require('./node');
 
 /*
  Public API.
@@ -17,7 +17,7 @@ exports.visit = visit;
  Implementation.
  */
 function visit(items, fromPath, templateSettings) {
-  const directoryItems = globule.find('*', { cwd: fromPath });
+  const directoryItems = globule.find('*', {cwd: fromPath});
   if (directoryItems.indexOf('template.js') >= 0) {
     directoryItems.splice(directoryItems.indexOf('template.js'), 1);
   }
@@ -37,8 +37,8 @@ function visit(items, fromPath, templateSettings) {
 function cleanDirectory(changedFiles) {
   if (changedFiles.length) {
     const changedDir = path.dirname(changedFiles[0]);
-    const allFiles = globule.find('*', { nodir: true, cwd: changedDir, prefixBase: true });
-    const obsoleteFiles = _.difference(allFiles, changedFiles);
+    const allFiles = globule.find('*', {nodir: true, cwd: changedDir, prefixBase: true});
+    const obsoleteFiles = difference(allFiles, changedFiles);
     for (let obsoleteFile of obsoleteFiles) {
       utils.logRemoval(obsoleteFile);
       !dryRun && fs.unlinkSync(obsoleteFile);

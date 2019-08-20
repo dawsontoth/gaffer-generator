@@ -1,10 +1,10 @@
 require('colors');
-const _ = require('lodash'),
-  fs = require('fs');
+const defaults = require('lodash.defaults');
+const fs = require('fs');
 
-const utils = require('../utils'),
-  directory = require('./directory'),
-  file = require('./file');
+const utils = require('../utils');
+const directory = require('./directory');
+const file = require('./file');
 
 /*
  Public API.
@@ -19,19 +19,18 @@ function visit(context, fromPath, toPath, templateSettings, changedFiles) {
   const items = findArrayIterationInPath(context, toPath);
   if (stat.isDirectory()) {
     directory.visit(items, fromPath, templateSettings);
-  }
-  else if (stat.isFile()) {
+  } else if (stat.isFile()) {
     file.visit(items, fromPath, toPath, templateSettings, changedFiles);
   }
 }
 
 function findArrayIterationInPath(context, itemPath) {
-  let match = itemPath.match(/_each([A-Z][a-z]+)/),
-    type = match && match[1];
+  const match = itemPath.match(/_each([A-Z][a-z]+)/);
+  const type = match && match[1];
   return (type && context[type.toLowerCase() + 's'] || [context])
     .map(item => {
       return {
-        context: type ? _.defaults({ [type]: item }, item, context) : context,
+        context: type ? defaults({[type]: item}, item, context) : context,
         path: utils.parameterizeString(
           itemPath
             .replace(/_each[A-Z][A-Za-z]+\./, '_')

@@ -4,7 +4,7 @@ const path = require('path');
  Testing utility API.
  */
 const fs = jest.genMockFromModule('fs');
-let responses = {};
+const responses = {};
 let mockFiles = {};
 fs.__setMockFiles = __setMockFiles;
 fs.__setResponse = __setResponse;

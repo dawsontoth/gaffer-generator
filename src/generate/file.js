@@ -1,9 +1,10 @@
 require('colors');
-const _ = require('lodash'),
-  argv = require('yargs').argv;
+const defaults = require('lodash.defaults');
+const template = require('lodash.template');
+const argv = require('yargs').argv;
 
-const utils = require('../utils'),
-  dryRun = argv.dryRun || false;
+const utils = require('../utils');
+const dryRun = argv.dryRun || false;
 
 /*
  Public API.
@@ -14,16 +15,15 @@ exports.visit = visit;
  Implementation.
  */
 function visit(items, fromPath, toPath, templateSettings, changedFiles) {
-  const templateUtils = _.defaults({}, templateSettings, utils);
-  let template;
+  const templateUtils = defaults({}, templateSettings, utils);
+  let compiledTemplate;
 
   try {
-    template = _.template(
+    compiledTemplate = template(
       templateUtils.safeRead(fromPath),
       templateSettings.templateArgs || require('../templateArgs'),
     );
-  }
-  catch (err) {
+  } catch (err) {
     templateUtils.logError(
       'Hit error when compiling template:\n'.red
       + String(fromPath).cyan + '\n'
@@ -33,9 +33,9 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
 
   for (const item of items) {
     try {
-      const instanceData = _.defaults({ utils: templateUtils }, item.context);
+      const instanceData = defaults({utils: templateUtils}, item.context);
       const existingContents = templateUtils.safeRead(item.path);
-      let newContents = template(instanceData);
+      let newContents = compiledTemplate(instanceData);
       if (templateUtils.mapContents) {
         newContents = templateUtils.mapContents(newContents, instanceData, item);
       }
@@ -46,8 +46,7 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
           !dryRun && templateUtils.safeWrite(item.path, newContents);
         }
       }
-    }
-    catch (err) {
+    } catch (err) {
       templateUtils.logError(
         'Hit error when running template:\n'.red
         + fromPath.cyan + ' => '.gray + item.path.cyan + '\n'
