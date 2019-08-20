@@ -1,6 +1,5 @@
 const node = require('./node');
 
 test('should be tested', () => {
-  let tested = false;
-  expect(tested).toBe(true);
+  throw new Error('node.js is not yet tested');
 });

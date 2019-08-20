@@ -1,6 +1,5 @@
 const root = require('./root');
 
 test('should be tested', () => {
-  let tested = false;
-  expect(tested).toBe(true);
+  throw new Error('root.js is not yet tested');
 });
