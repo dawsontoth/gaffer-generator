@@ -31,7 +31,7 @@ function visit(items, fromPath, templateSettings) {
         changedFiles);
     }
   }
-  cleanDirectory(changedFiles);
+  !templateSettings.skipCleaning && cleanDirectory(changedFiles);
 }
 
 function cleanDirectory(changedFiles) {
