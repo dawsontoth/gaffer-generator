@@ -51,5 +51,5 @@ function visit(rootPath) {
         + templateSettingsPath.cyan + '\n'
         + err);
     })
-    .then(json => node.visit(json, rootPath, toPath, templateSettings));
+    .then(json => json && node.visit(json, rootPath, toPath, templateSettings));
 }
