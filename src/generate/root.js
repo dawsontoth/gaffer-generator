@@ -44,7 +44,7 @@ function visit(rootPath) {
     return;
   }
   const toPath = path.join(rootPath, templateSettings.into);
-  templateSettings.download()
+  templateSettings.download(utils.fetch)
     .catch(err => {
       utils.logError(
         'Hit error when downloading for .templateroot:\n'.red

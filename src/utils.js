@@ -3,6 +3,7 @@ const get = require('lodash.get');
 const fs = require('fs');
 const path = require('path');
 const argv = require('yargs').argv;
+const fetch = require('node-fetch');
 
 /*
  Public API.
@@ -16,6 +17,7 @@ exports.logRemoval = logRemoval;
 exports.logError = logError;
 exports.parameterizeString = parameterizeString;
 exports.lowerCaseFirst = lowerCaseFirst;
+exports.fetch = fetch;
 
 /*
  Implementation.
