@@ -1,5 +1,5 @@
 {
-  "name": "gaffer",
+  "name": "gaffer-generator",
   "version": "1.1.0",
   "description": "",
   "main": "cli.js",
