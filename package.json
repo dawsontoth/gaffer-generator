@@ -1,13 +1,13 @@
 {
   "name": "gaffer-generator",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "main": "cli.js",
   "scripts": {
     "test": "jest"
   },
   "bin": {
-    "gaffer": "./cli.js"
+    "gaffer-generator": "./cli.js"
   },
   "keywords": [],
   "author": "Dawson Toth",
