@@ -5,6 +5,8 @@ jest.mock('fs');
 const utils = require('./utils');
 const fs = require('fs');
 
+const _n = utils.normalizePath;
+
 describe('contentsDiffer', () => {
   test('handles one or more empty contents', () => {
     expect(utils.contentsDiffer('', '')).toBe(false);
@@ -27,57 +29,57 @@ describe('contentsDiffer', () => {
 describe('safeRead', () => {
   test('returns null when file does not exist', () => {
     fs.__setResponse('existsSync', false);
-    expect(utils.safeRead('/foo/bar.js')).toBe(null);
+    expect(utils.safeRead(_n('/foo/bar.js'))).toBe(null);
   });
   test('returns contents when file does exist', () => {
     fs.__setResponse('existsSync', true);
     fs.__setResponse('readFileSync', 'baz');
-    expect(utils.safeRead('/foo/bar.js')).toBe('baz');
+    expect(utils.safeRead(_n('/foo/bar.js'))).toBe('baz');
   });
   test('allows string argument', () => {
     fs.__setResponse('existsSync', false);
-    expect(utils.safeRead('/foo/bar.js')).toBe(null);
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo/bar.js');
+    expect(utils.safeRead(_n('/foo/bar.js'))).toBe(null);
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo/bar.js'));
   });
   test('allows file argument', () => {
     fs.__setResponse('existsSync', false);
-    expect(utils.safeRead({dirname: '/foo', basename: 'bar.js'})).toBe(null);
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo/bar.js');
+    expect(utils.safeRead({dirname: _n('/foo'), basename: 'bar.js'})).toBe(null);
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo/bar.js'));
   });
 });
 
 describe('safeWrite', () => {
   test('creates directories recursively', () => {
     fs.__setResponse('existsSync', false);
-    utils.safeWrite('/foo/bar/baz.js', 'qux');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo/bar');
-    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith('/foo/bar');
-    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith('/foo/bar/baz.js', 'qux', 'UTF-8');
+    utils.safeWrite(_n('/foo/bar/baz.js'), 'qux');
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo/bar'));
+    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith(_n('/foo/bar'));
+    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith(_n('/foo/bar/baz.js'), 'qux', 'UTF-8');
   });
   test('only creates directories when they do not exist', () => {
     fs.__setResponse('existsSync', true);
-    utils.safeWrite('/foo/bar/baz.js', 'qux');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.mkdirSync).not.toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo/bar');
-    expect(fs.__spy.mkdirSync).not.toHaveBeenCalledWith('/foo/bar');
-    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith('/foo/bar/baz.js', 'qux', 'UTF-8');
+    utils.safeWrite(_n('/foo/bar/baz.js'), 'qux');
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.mkdirSync).not.toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo/bar'));
+    expect(fs.__spy.mkdirSync).not.toHaveBeenCalledWith(_n('/foo/bar'));
+    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith(_n('/foo/bar/baz.js'), 'qux', 'UTF-8');
   });
   test('allows string argument', () => {
     fs.__setResponse('existsSync', false);
-    utils.safeWrite('/foo/bar.js', 'baz');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith('/foo/bar.js', 'baz', 'UTF-8');
+    utils.safeWrite(_n('/foo/bar.js'), 'baz');
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith(_n('/foo/bar.js'), 'baz', 'UTF-8');
   });
   test('allows file argument', () => {
     fs.__setResponse('existsSync', false);
-    utils.safeWrite({dirname: '/foo', basename: 'bar.js'}, 'baz');
-    expect(fs.__spy.existsSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith('/foo');
-    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith('/foo/bar.js', 'baz', 'UTF-8');
+    utils.safeWrite({dirname: _n('/foo'), basename: 'bar.js'}, 'baz');
+    expect(fs.__spy.existsSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.mkdirSync).toHaveBeenCalledWith(_n('/foo'));
+    expect(fs.__spy.writeFileSync).toHaveBeenCalledWith(_n('/foo/bar.js'), 'baz', 'UTF-8');
   });
 });
 

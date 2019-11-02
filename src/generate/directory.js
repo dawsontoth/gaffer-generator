@@ -37,8 +37,8 @@ function visit(items, fromPath, templateSettings) {
 function cleanDirectory(changedFiles) {
   if (changedFiles.length) {
     const changedDir = path.dirname(changedFiles[0]);
-    const allFiles = globule.find('*', {nodir: true, cwd: changedDir, prefixBase: true});
-    const obsoleteFiles = difference(allFiles, changedFiles);
+    const allFiles = globule.find('*', {nodir: true, cwd: changedDir, prefixBase: true}).map(utils.normalizePath);
+    const obsoleteFiles = difference(allFiles, changedFiles.map(utils.normalizePath));
     for (let obsoleteFile of obsoleteFiles) {
       utils.logRemoval(obsoleteFile);
       !dryRun && fs.unlinkSync(obsoleteFile);

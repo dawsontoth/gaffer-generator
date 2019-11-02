@@ -1,7 +1,6 @@
 require('colors');
 const fs = require('fs');
 const globule = require('globule');
-const defaults = require('lodash.defaults');
 const path = require('path');
 const argv = require('yargs').argv;
 
@@ -49,6 +48,7 @@ function visit(rootPath) {
     return;
   }
   const toPath = templateSettings.into[0] === '/' ? templateSettings.into : path.join(rootPath, templateSettings.into);
+  utils.log('Running download from '.green + templateSettingsPath.magenta);
   templateSettings.download(utils.fetch)
     .catch(err => {
       utils.logError(

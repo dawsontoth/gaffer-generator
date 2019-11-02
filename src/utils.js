@@ -18,6 +18,7 @@ exports.logError = logError;
 exports.parameterizeString = parameterizeString;
 exports.lowerCaseFirst = lowerCaseFirst;
 exports.fetch = fetch;
+exports.normalizePath = normalizePath;
 
 /*
  Implementation.
@@ -39,7 +40,7 @@ function contentsDiffer(a, b) {
     return true;
   }
   // Otherwise, compare them while ignoring line endings to see if they're equivalent.
-  return a.replace(/\r\n/g, '\n') !== b.replace(/\r\n/g, '\n');
+  return normalizeLineEndings(a) !== normalizeLineEndings(b);
 }
 
 /**
@@ -48,9 +49,9 @@ function contentsDiffer(a, b) {
  * @returns {string}
  */
 function safeRead(file) {
-  let url = typeof file === 'string'
+  let url = normalizePath(typeof file === 'string'
     ? file
-    : path.join(file.dirname, file.basename);
+    : path.join(file.dirname, file.basename));
   return fs.existsSync(url)
     ? fs.readFileSync(url, 'UTF-8')
     : null;
@@ -62,9 +63,9 @@ function safeRead(file) {
  * @param contents
  */
 function safeWrite(file, contents) {
-  const url = typeof file === 'string'
+  const url = normalizePath(typeof file === 'string'
     ? file
-    : path.join(file.dirname, file.basename);
+    : path.join(file.dirname, file.basename));
   const dirs = url.split(path.sep).slice(0, -1);
   // Note: we start at 1 to avoid trying to create the root directory.
   for (let i = 1; i < dirs.length; i++) {
@@ -78,9 +79,12 @@ function safeWrite(file, contents) {
 
 /**
  * If the file doesn't exist, logs a message saying it is being created. Otherwise, it's being updated.
- * @param url
+ * @param file
  */
-function logChange(url) {
+function logChange(file) {
+  let url = normalizePath(typeof file === 'string'
+      ? file
+      : path.join(file.dirname, file.basename));
   log((`${fs.existsSync(url) ? 'updating' : 'creating'}: `).cyan + url.magenta);
 }
 
@@ -139,4 +143,22 @@ function lowerCaseFirst(val) {
     return val;
   }
   return val[0].toLowerCase() + val.substr(1);
+}
+
+/**
+ * Normalizes a path across platforms. (Root / paths are assumed to be on C:\ on windows).
+ * @param ref
+ * @returns {string}
+ */
+function normalizePath(ref) {
+  return ref && ref.startsWith('/') ? path.resolve(ref) : path.normalize(ref);
+}
+
+/**
+ * Normalizes line endings for comparison purposes.
+ * @param contents
+ * @returns {string}
+ */
+function normalizeLineEndings(contents) {
+  return contents.replace(/\r\n?/g, '\n');
 }
