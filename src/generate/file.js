@@ -1,6 +1,7 @@
 require('colors');
-const defaults = require('lodash.defaults');
-const template = require('lodash.template');
+const _ = require('../lodash');
+const defaults = _.defaults;
+const template = _.template;
 const argv = require('yargs').argv;
 
 const utils = require('../utils');
@@ -21,14 +22,16 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
   try {
     compiledTemplate = template(
       templateUtils.safeRead(fromPath),
-      templateSettings.templateArgs || require('../templateArgs'),
+      defaults({
+        sourceURL: fromPath,
+      }, templateSettings.templateArgs || require('../templateArgs')),
     );
   }
   catch (err) {
     templateUtils.logError(
       'Hit error when compiling template:\n'.red
-      + String(fromPath).cyan + '\n'
-      + err);
+      + String(fromPath).cyan,
+      err);
     return;
   }
 
@@ -51,8 +54,8 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
     catch (err) {
       templateUtils.logError(
         'Hit error when running template:\n'.red
-        + fromPath.cyan + ' => '.gray + item.path.cyan + '\n'
-        + err);
+        + fromPath.cyan + ' => '.gray + item.path.cyan,
+        err);
     }
   }
 }

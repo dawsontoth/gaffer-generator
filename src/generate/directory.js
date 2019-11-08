@@ -1,4 +1,5 @@
-const difference = require('lodash.difference');
+const _ = require('../lodash');
+const difference = _.difference;
 const path = require('path');
 const fs = require('fs');
 const globule = require('globule');

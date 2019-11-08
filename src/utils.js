@@ -1,5 +1,6 @@
 require('colors');
-const get = require('lodash.get');
+const _ = require('./lodash');
+const get = _.get;
 const fs = require('fs');
 const path = require('path');
 const argv = require('yargs').argv;
@@ -99,24 +100,32 @@ function logRemoval(url) {
 /**
  * Logs an error.
  * @param text
+ * @param [err]
  */
-function logError(text) {
-  log(text, true);
+function logError(text, err) {
+  log(text, err, true);
 }
 
 /**
  * Logs a message to the console with a nice prefix.
  * @param text The text to write.
+ * @param [error] The optional error to log
  * @param writeAsError If we should use console.error or console.log.
  */
-function log(text, writeAsError = false) {
+function log(text, error = null, writeAsError = false) {
   if (argv.silent) {
     return;
   }
   let prefix = `[${new Date().toTimeString().split(' ')[0]}] `.gray;
   if (writeAsError) {
-    console.error(prefix + text);
-  } else {
+    if (error) {
+      console.error(prefix + text, error);
+    }
+    else {
+      console.error(prefix + text);
+    }
+  }
+  else {
     console.log(prefix + text);
   }
 }

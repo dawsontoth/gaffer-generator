@@ -15,10 +15,6 @@
   "dependencies": {
     "colors": "^1.4.0",
     "globule": "^1.2.1",
-    "lodash.defaults": "^4.2.0",
-    "lodash.difference": "^4.5.0",
-    "lodash.get": "^4.4.2",
-    "lodash.template": "^4.5.0",
     "node-fetch": "^2.6.0",
     "recursive-copy": "^2.0.10",
     "yargs": "^14.2.0"

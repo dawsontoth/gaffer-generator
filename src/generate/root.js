@@ -53,8 +53,8 @@ function visit(rootPath) {
     .catch(err => {
       utils.logError(
         'Hit error when downloading for .templateroot:\n'.red
-        + templateSettingsPath.cyan + '\n'
-        + err);
+        + templateSettingsPath.cyan,
+        err);
     })
     .then(json => json && node.visit(json, rootPath, toPath, templateSettings));
 }

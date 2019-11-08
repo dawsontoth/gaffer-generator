@@ -1,5 +1,6 @@
 require('colors');
-const defaults = require('lodash.defaults');
+const _ = require('../lodash');
+const defaults = _.defaults;
 const fs = require('fs');
 
 const utils = require('../utils');
