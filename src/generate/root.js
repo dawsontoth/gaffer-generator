@@ -17,7 +17,7 @@ exports.visit = visit;
  Implementation.
  */
 function run(directory) {
-  const matches = globule.find(path.join(directory, '**/*.templateroot'));
+  const matches = globule.find(path.join(directory, '**/*.templateroot'), '!node_modules');
   for (const match of matches) {
     visit(path.resolve(match));
   }
