@@ -24,11 +24,11 @@ function run(directory) {
 }
 
 function visit(rootPath) {
-  const templateSettingsPath = path.join(rootPath, 'template.js');
-  if (!fs.existsSync(templateSettingsPath)) {
+  const templateSettingsPath = determineTemplateFile(rootPath);
+  if (!templateSettingsPath) {
     utils.logError(
-      'Found .templateroot without a template.js file:\n'.red
-      + templateSettingsPath.cyan);
+      'Found .templateroot without a template.js or template.ts file:\n'.red
+      + rootPath.cyan);
     return;
   }
   const templateSettings = require(templateSettingsPath);
@@ -37,13 +37,13 @@ function visit(rootPath) {
   }
   if (!templateSettings.into) {
     utils.logError(
-      'Found .templateroot that does not have a "into" export in template.js:\n'.red
+      'Found .templateroot that does not have a "into" export in template file:\n'.red
       + templateSettingsPath.cyan);
     return;
   }
   if (!templateSettings.download) {
     utils.logError(
-      'Found .templateroot that does not have a "download" export in template.js:\n'.red
+      'Found .templateroot that does not have a "download" export in template file:\n'.red
       + templateSettingsPath.cyan);
     return;
   }
@@ -57,4 +57,22 @@ function visit(rootPath) {
         + err);
     })
     .then(json => json && node.visit(json, rootPath, toPath, templateSettings));
+}
+
+function determineTemplateFile(rootPath) {
+  const jsTemplate = path.join(rootPath, 'template.js');
+  const tsTemplate = path.join(rootPath, 'template.ts');
+  if (fs.existsSync(jsTemplate)) {
+    return jsTemplate;
+  }
+  if (fs.existsSync(tsTemplate)) {
+    try {
+      require('ts-node').register();
+    }
+    catch (err) {
+      console.warn('Detected template.ts, but ts-node failed to register:', err);
+    }
+    return tsTemplate;
+  }
+  return null;
 }
