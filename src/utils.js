@@ -83,8 +83,8 @@ function safeWrite(file, contents) {
  */
 function logChange(file) {
   let url = normalizePath(typeof file === 'string'
-      ? file
-      : path.join(file.dirname, file.basename));
+    ? file
+    : path.join(file.dirname, file.basename));
   log((`${fs.existsSync(url) ? 'updating' : 'creating'}: `).cyan + url.magenta);
 }
 

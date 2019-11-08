@@ -19,7 +19,8 @@ function visit(context, fromPath, toPath, templateSettings, changedFiles) {
   const items = findArrayIterationInPath(context, toPath);
   if (stat.isDirectory()) {
     directory.visit(items, fromPath, templateSettings);
-  } else if (stat.isFile()) {
+  }
+  else if (stat.isFile()) {
     file.visit(items, fromPath, toPath, templateSettings, changedFiles);
   }
 }

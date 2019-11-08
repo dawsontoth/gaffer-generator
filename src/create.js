@@ -31,7 +31,7 @@ function run(directory) {
     .then(results => {
       utils.log(results.length + ' file(s) copied');
     })
-    .catch(function (error) {
+    .catch(function(error) {
       utils.logError(String(error).red);
       process.exit(1);
     });

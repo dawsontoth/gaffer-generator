@@ -23,7 +23,8 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
       templateUtils.safeRead(fromPath),
       templateSettings.templateArgs || require('../templateArgs'),
     );
-  } catch (err) {
+  }
+  catch (err) {
     templateUtils.logError(
       'Hit error when compiling template:\n'.red
       + String(fromPath).cyan + '\n'
@@ -33,7 +34,7 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
 
   for (const item of items) {
     try {
-      const instanceData = defaults({utils: templateUtils}, item.context);
+      const instanceData = defaults({ utils: templateUtils }, item.context);
       const existingContents = templateUtils.safeRead(item.path);
       let newContents = compiledTemplate(instanceData);
       if (templateUtils.mapContents) {
@@ -46,7 +47,8 @@ function visit(items, fromPath, toPath, templateSettings, changedFiles) {
           !dryRun && templateUtils.safeWrite(item.path, newContents);
         }
       }
-    } catch (err) {
+    }
+    catch (err) {
       templateUtils.logError(
         'Hit error when running template:\n'.red
         + fromPath.cyan + ' => '.gray + item.path.cyan + '\n'
