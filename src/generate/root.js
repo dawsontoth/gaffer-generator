@@ -17,7 +17,10 @@ exports.visit = visit;
  Implementation.
  */
 function run(directory) {
-  const matches = globule.find(path.join(directory, '**/*.templateroot'), '!node_modules');
+  const matches = globule.find({
+    src: path.join(directory, '**/*.templateroot'),
+    filter: match => match.indexOf('node_modules') === -1,
+  });
   for (const match of matches) {
     visit(path.resolve(match));
   }
