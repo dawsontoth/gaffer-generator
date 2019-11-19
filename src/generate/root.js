@@ -20,6 +20,7 @@ function run(directory) {
   const matches = globule.find({
     src: path.join(directory, '**/*.templateroot'),
     filter: match => match.indexOf('node_modules') === -1,
+    dot: true,
   });
   for (const match of matches) {
     visit(path.resolve(match));

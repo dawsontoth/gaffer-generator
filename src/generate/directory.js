@@ -20,7 +20,7 @@ exports.visit = visit;
  Implementation.
  */
 function visit(items, fromPath, templateSettings) {
-  const directoryItems = globule.find('*', { cwd: fromPath })
+  const directoryItems = globule.find('*', { cwd: fromPath, dot: true })
     .filter(i => reservedItems.indexOf(i) === -1);
   const changedFiles = [];
   for (const item of items) {
@@ -38,7 +38,7 @@ function visit(items, fromPath, templateSettings) {
 function cleanDirectory(changedFiles) {
   if (changedFiles.length) {
     const changedDir = path.dirname(changedFiles[0]);
-    const allFiles = globule.find('*', { nodir: true, cwd: changedDir, prefixBase: true }).map(utils.normalizePath);
+    const allFiles = globule.find('*', { nodir: true, cwd: changedDir, prefixBase: true, dot: true }).map(utils.normalizePath);
     const obsoleteFiles = difference(allFiles, changedFiles.map(utils.normalizePath));
     for (let obsoleteFile of obsoleteFiles) {
       utils.logRemoval(obsoleteFile);
