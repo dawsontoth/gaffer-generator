@@ -1,5 +1,6 @@
 const _ = require('../lodash');
 const difference = _.difference;
+const uniq = _.uniq;
 const path = require('path');
 const fs = require('fs');
 const globule = require('globule');
@@ -37,12 +38,19 @@ function visit(items, fromPath, templateSettings) {
 
 function cleanDirectory(changedFiles) {
   if (changedFiles.length) {
-    const changedDir = path.dirname(changedFiles[0]);
-    const allFiles = globule.find('*', { nodir: true, cwd: changedDir, prefixBase: true, dot: true }).map(utils.normalizePath);
-    const obsoleteFiles = difference(allFiles, changedFiles.map(utils.normalizePath));
-    for (let obsoleteFile of obsoleteFiles) {
-      utils.logRemoval(obsoleteFile);
-      !dryRun && fs.unlinkSync(obsoleteFile);
-    }
+    const changedDirs = uniq(changedFiles.map(path.dirname));
+    changedDirs.forEach(changedDir => {
+      const allFiles = globule.find('*', {
+        nodir: true,
+        cwd: changedDir,
+        prefixBase: true,
+        dot: true,
+      }).map(utils.normalizePath);
+      const obsoleteFiles = difference(allFiles, changedFiles.map(utils.normalizePath));
+      for (let obsoleteFile of obsoleteFiles) {
+        utils.logRemoval(obsoleteFile);
+        !dryRun && fs.unlinkSync(obsoleteFile);
+      }
+    });
   }
 }
