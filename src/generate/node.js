@@ -27,7 +27,7 @@ function visit(context, fromPath, toPath, templateSettings, changedFiles) {
 }
 
 function findArrayIterationInPath(context, itemPath) {
-  const match = itemPath.match(/_each([A-Z][a-z]+)/);
+  const match = itemPath.match(/_[Ee]ach([A-Z][a-z]+)/);
   const type = match && match[1];
   return (type && context[type.toLowerCase() + 's'] || [context])
     .map(item => {
@@ -37,7 +37,7 @@ function findArrayIterationInPath(context, itemPath) {
           [type.toLowerCase()]: item,
         }, item, context) : context;
       const rawPath = itemPath
-        .replace(/_each[A-Z][A-Za-z]+\./, a => '_' + a.substr(5).toLowerCase())
+        .replace(/_[Ee]ach[A-Z][A-Za-z]+\./, a => '_' + a.substr(5).toLowerCase())
         .replace(/\.templateroot$/, '');
       return {
         context: subContext,

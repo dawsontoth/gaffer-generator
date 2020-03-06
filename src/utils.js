@@ -139,7 +139,13 @@ function log(text, error = null, writeAsError = false) {
 function parameterizeString(str, context) {
   return str.replace(
     /_[a-z]*\.?[a-z]+_/ig,
-    match => get(context, match.slice(1, -1)) || match);
+    match => {
+      const variableName = match.slice(1, -1);
+      return get(context, variableName)
+        || get(context, variableName.toLowerCase())
+        || get(context, variableName.toUpperCase())
+        || match;
+    });
 }
 
 /**
