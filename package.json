@@ -1,6 +1,6 @@
 {
   "name": "gaffer-generator",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "main": "cli.js",
   "scripts": {
