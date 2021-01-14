@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "Dawson Toth",
-  "license": "",
+  "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
     "globule": "^1.2.1",
