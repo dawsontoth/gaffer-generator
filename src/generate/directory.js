@@ -10,7 +10,7 @@ const utils = require('../utils');
 const dryRun = argv.dryRun || false;
 const node = require('./node');
 
-const reservedItems = ['template.js', 'template.ts', 'template'];
+const reservedItems = ['template.js', 'template.ts', 'template', '.DS_Store'];
 
 /*
  Public API.
