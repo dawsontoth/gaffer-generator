@@ -62,11 +62,11 @@ You should see output similar to the following:
 Let's break down the discrete steps that happened above:
 
 1. We search the current directory recursively for `.templateroot` directories.
-2. When one is found, we read in the `template.js` file (it should be a CommonJS module).
+2. When one is found, we read in the `template.cjs` (or `template.js`) file (it should be a CommonJS module).
 3. Call the `download` method of this file, which should return a promise that eventually resolves to any JSON describing what you want to generate.
-4. Using the exported `into` property from the `template.js`, we'll recursively look at all of the other files within the `.templateroot`.
+4. Using the exported `into` property from the `template.cjs` (or `template.js`), we'll recursively look at all of the other files within the `.templateroot`.
 5. When we find a directory, recurse in to it!
-6. When we find a file, parse it as a [lodash template](https://lodash.com/docs/4.17.11#template). The context will be whatever was returned from the `download` promise above, plus any exported methods of our `template.js` will be exposed on the `utils` object.
+6. When we find a file, parse it as a [lodash template](https://lodash.com/docs/4.17.11#template). The context will be whatever was returned from the `download` promise above, plus any exported methods of our `template.cjs` (or `template.js`) will be exposed on the `utils` object.
 7. When we find a variable in the path, like `_fileName_.ts`, evaluate it based on our context from `download`.
 8. When we find a `_each` in the path, like `_eachEnum.fileName_.ts`, expand it out. This lets us generate many files from a single template.
 

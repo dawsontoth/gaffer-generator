@@ -31,7 +31,7 @@ function visit(rootPath) {
   const templateSettingsPath = determineTemplateFile(rootPath);
   if (!templateSettingsPath) {
     utils.logError(
-      'Found .templateroot without a template.js or template.ts file:\n'.red
+      'Found .templateroot without a template.cjs, template.js or template.ts file:\n'.red
       + rootPath.cyan);
     return;
   }
