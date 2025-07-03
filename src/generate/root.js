@@ -64,8 +64,12 @@ function visit(rootPath) {
 }
 
 function determineTemplateFile(rootPath) {
+  const cjsTemplate = path.join(rootPath, 'template.cjs');
   const jsTemplate = path.join(rootPath, 'template.js');
   const tsTemplate = path.join(rootPath, 'template.ts');
+  if (fs.existsSync(cjsTemplate)) {
+    return cjsTemplate;
+  }
   if (fs.existsSync(jsTemplate)) {
     return jsTemplate;
   }
