@@ -90,6 +90,8 @@ There are several flags you can pass. To see them, run `gaffer-generator --help`
 
 ## Testing
 
+During development on Gaffer Generator itself, you can run various tests across the codebase. This will unit test and perform basic integration tests on the generated results.
+
 ```$bash
 npm run test
 ```
