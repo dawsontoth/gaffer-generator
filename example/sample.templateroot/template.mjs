@@ -1,24 +1,27 @@
-const path = require('path'),
-  fs = require('fs');
+import path from 'path';
+import fs from 'fs';
+import sample from './sample.json' with { type: 'json' };
 
 // Download (or fake-download) the necessary metadata:
-exports.download = () => new Promise(resolve => resolve(require('../sample.json')))
-  .then(json => createFileNames(json));
-// or: require('node-fetch').fetch('https://some-api.com/swagger')
-//   .then(res => res.json()),
+export function download() {
+  return new Promise(resolve => resolve(sample))
+    .then(json => createFileNames(json));
+}
+
+// or: fetch('https://some-api.com/swagger').then(res => res.json()),
 
 // Set the target directory:
-exports.into = '../sample.output/';
+export const into = '../sample.output/';
 
 // Customize the templates (if desired):
-// exports.templateArgs = {
+// export const templateArgs = {
 //   evaluate: /(?:\/\*_|<#)([\s\S]+?)(?:_\*\/|#>)/g,
 //   escape: /(?:\/\*_|<#)-([\s\S]+?)(?:_\*\/|#>)/g,
 //   interpolate: /(?:\/\*_|<#)=([\s\S]+?)(?:_\*\/|#>)/g,
 // };
 
 // Map the generated code one last time for clean-up:
-exports.mapContents = mapContents;
+export { mapContents };
 
 // That's it, you're all configured!
 // Everything below will be used by the templates to maintain your fancy new code.
@@ -72,26 +75,26 @@ let MetaTypes = {
 /*
  Utilities for template.
  */
-exports.parseType = parseType;
-exports.copyProperties = copyProperties;
-exports.fromJSON = fromJSON;
-exports.httpMethodToString = httpMethodToString;
-exports.parseParams = parseParams;
-exports.parsePath = parsePath;
-exports.protectPath = protectPath;
-exports.outputQuery = outputQuery;
-exports.outputBody = outputBody;
-exports.lowerCaseFirst = lowerCaseFirst;
-exports.translateReserved = translateReserved;
-exports.hasParams = hasParams;
-exports.hasRequiredParams = hasRequiredParams;
-exports.enableCaching = enableCaching;
-exports.isString = isString;
-exports.toFileName = toFileName;
-exports.customExists = customExists;
-exports.handleBase = handleBase;
-exports.MetaTypes = MetaTypes;
-exports.MetaStringFormat = MetaStringFormat;
+export { parseType };
+export { copyProperties };
+export { fromJSON };
+export { httpMethodToString };
+export { parseParams };
+export { parsePath };
+export { protectPath };
+export { outputQuery };
+export { outputBody };
+export { lowerCaseFirst };
+export { translateReserved };
+export { hasParams };
+export { hasRequiredParams };
+export { enableCaching };
+export { isString };
+export { toFileName };
+export { customExists };
+export { handleBase };
+export { MetaTypes };
+export { MetaStringFormat };
 
 /*
  Implementation.
@@ -397,8 +400,8 @@ let customExistsHash = {};
 function customExists(Model) {
   const ref = path.resolve(
     path.join(
-      __dirname,
-      exports.into,
+      import.meta.dirname,
+      into,
       'custom',
       Model.fileName + '.ts',
     ),

@@ -6,7 +6,7 @@ My old Gaffer is tired of writing code, so he generates it instead! This is how 
 
 ## Requirements
 
-Install the latest LTS of NodeJS. Or a version around v8.11.3. Or try whatever you've got installed already, maybe it will work!
+Install the latest LTS of NodeJS. Or a version around v24. Or try whatever you've got installed already, maybe it will work!
 https://nodejs.org/en/
 
 Also install `yarn`. Or don't, and use `npm` instead.
@@ -91,5 +91,5 @@ There are several flags you can pass. To see them, run `gaffer-generator --help`
 ## Testing
 
 ```$bash
-yarn test
+npm run test
 ```
