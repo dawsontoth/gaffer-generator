@@ -46,7 +46,7 @@
     "@vitest/coverage-v8": "^4.0.8",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "eslint": "^9.39.1",
-    "globals": "^16.5.0",
+    "globals": "^17.0.0",
     "semantic-release": "^25.0.2",
     "ts-node": "^10.9.2",
     "vitest": "^4.0.8"
