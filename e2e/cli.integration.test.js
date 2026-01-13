@@ -34,9 +34,9 @@ describe('CLI integration (README flow)', () => {
     });
     // Helpful diagnostics on failure
     if (res.status !== 0) {
-      // eslint-disable-next-line no-console
+       
       console.error('CLI stdout:\n', res.stdout);
-      // eslint-disable-next-line no-console
+       
       console.error('CLI stderr:\n', res.stderr);
     }
     return res;
