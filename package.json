@@ -1,5 +1,5 @@
 {
-  "version": "2.1.16",
+  "version": "2.1.17",
   "name": "gaffer-generator",
   "description": "Generates code across files based on your templates",
   "author": "Dawson Toth",
