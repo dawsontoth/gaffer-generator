@@ -43,12 +43,12 @@
     "@semantic-release/github": "^12.0.2",
     "@semantic-release/npm": "^13.1.1",
     "@semantic-release/release-notes-generator": "^14.1.0",
-    "@vitest/coverage-v8": "^4.0.8",
+    "@vitest/coverage-v8": "^5.0.0",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "eslint": "^10.0.0",
     "globals": "^17.0.0",
     "semantic-release": "^25.0.2",
     "ts-node": "^10.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^5.0.0"
   }
 }
