@@ -6,6 +6,9 @@
   "keywords": [],
   "homepage": ".",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "license": "ISC",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -32,7 +35,6 @@
     "lodash.get": "^4.4.2",
     "lodash.template": "^4.5.0",
     "lodash.uniq": "^4.5.0",
-    "node-fetch": "^2.6.7",
     "recursive-copy": "^2.0.14",
     "yargs": "^18.0.0"
   },
